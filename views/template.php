@@ -43,12 +43,17 @@
 
             <div class="navbar-collapse collapse justify-content-end" id="navbarLogin">
                 <ul class="navbar-nav">
+                    <?php if(isset($_SESSION['usuarioTipo']) && $_SESSION['usuarioTipo'] == 'admin'): ?>
+                    <li class="nav item <?php echo ($viewData['local']=='meusanuncios')?'active':''; ?>">
+                        <a class="nav-link" href="#">Meus anuncios</a>
+                    </li>
+                    <?php endif; ?>
                     <?php if(isset($_SESSION['usuarioId']) && !empty($_SESSION['usuarioId'])): ?>
                     <li class="nav-item <?php echo ($viewData['local']=='lista')?'active':''; ?>">
                         <a class="nav-link" href="#">Lista de desejos</a>
                     </li>
                     <li class="nav-item <?php echo ($viewData['local']=='sair')?'active':''; ?>">
-                        <a class="nav-link" href="#">Sair</a>
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>login/sair">Sair</a>
                     </li>
                     <?php else: ?>
                     <li class="nav-item <?php echo ($viewData['local']=='login')?'active':''; ?>">

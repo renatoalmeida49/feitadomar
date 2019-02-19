@@ -4,6 +4,11 @@
 	</div>
 	<div class="row justify-content-center">
 		<div class="col-6">
+			<?php
+				if(!empty($msg)) {
+					echo $msg;
+				}
+			?>
 			<form method="post">
 				<div class="form-group">
 					<label for="nome">Nome:</label><input type="text" name="nome" id="nome" class="form-control"/>
