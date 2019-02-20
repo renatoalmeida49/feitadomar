@@ -1,6 +1,43 @@
 <div class="container">
-    <div class="jumbotron">
-        <h1 class="display-4">Produtps Feita do mar</h1>
-        <p class="lead">Área de produtos.</p>
-    </div>
+	<div class="row justify-content-center">
+		<div class="jumbotron">
+        <h1 class="display-4">Nossos produtos</h1>
+    	</div>
+	</div>
+
+	<?php if (isset($_SESSION['usuarioTipo']) && $_SESSION['usuarioTipo'] == 'admin'): ?>
+		<div class="row justify-content-center">
+			<a href="<?php echo BASE_URL; ?>produtos/adicionar" class="btn btn-primary">Adicionar produtos</a>
+		</div>
+	<?php endif; ?>
+	<div class="row justify-content-center"	 style="margin-top: 7px">
+		<div class="table-responsive">
+			<table class="table table-stripped table-hover">
+				<tbody>
+					<?php foreach ($anuncios as $anuncio): ?>
+					<tr>
+						<td>
+							<img src="<?php echo BASE_URL; ?>assets/images/anuncios/<?php echo $anuncio['foto']; ?>" height="50" border="0"/>
+						</td>
+						<td>
+							<a href="<?php echo BASE_URL; ?>produtos/abrir/<?php echo $anuncio['id']; ?>"><?php echo $anuncio['titulo'];?></a>
+						</td>
+						<td>
+							R$ <?php echo number_format($anuncio['valor'], 2); ?>
+						</td>
+						<?php if (isset($_SESSION['usuarioTipo']) && $_SESSION['usuarioTipo'] == 'admin'): ?>
+							<?php foreach ($anuncios as $anuncio): ?>
+								<td>
+									<a href="<?php echo BASE_URL; ?>produtos/editar/<?php echo $anuncio['id']; ?>" class="btn btn-primary">Editar</a>
+									<a href="<?php echo BASE_URL; ?>produtos/excluir/<?php echo $anuncio['id']; ?>" class="btn btn-danger">Excluir</a>
+								</td>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+   
 </div>

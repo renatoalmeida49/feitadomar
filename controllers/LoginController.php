@@ -31,16 +31,16 @@ class LoginController extends Controller {
 
 	public function cadastrar() {
 		$dados = array();
-		$u = new Usuario();
+		$usuario = new Usuario();
 		$dao = new UsuarioDAO();
 		$dados['local'] = 'cadastre';
 
 		if (isset($_POST['login']) && !empty($_POST['nome'])) {
-			$u->setNome(addslashes($_POST['nome']));
-			$u->setLogin(addslashes($_POST['login']));
-			$u->setSenha($_POST['senha']);
+			$usuario->setNome(addslashes($_POST['nome']));
+			$usuario->setLogin(addslashes($_POST['login']));
+			$usuario->setSenha($_POST['senha']);
 
-			if ($dao->insert($u)) {
+			if ($dao->insert($usuario)) {
 				header("Location: ".BASE_URL."login");
 			} else {
 				$dados['msg'] = '
@@ -57,6 +57,7 @@ class LoginController extends Controller {
 		session_start();
 		unset($_SESSION['usuarioId']);
 		unset($_SESSION['usuarioTipo']);
+		unset($_SESSION['usuarioNome']);
 		header("Location: ".BASE_URL);
 	}
 }
