@@ -10,23 +10,70 @@ class ProdutoDAO extends Model {
 		$titulo = $produto->getTitulo();
 		$valor = $produto->getValor();
 		$descricao = $produto->getDescricao();
+		$foto = $produto->getFoto();
 
-		$sql = "INSERT INTO anuncios (titulo, valor, descricao) VALUES (:titulo, :valor, :descricao)";
+		if ($foto['type'] == 'image/jpeg' || $foto['type'] == 'image/png') {
+			$tmpname = md5(time().rand(0, 99)).'.jpg';
 
-		try {
-			$stmt = $this->db->prepare($sql);
-			$stmt->bindValue(':titulo', $titulo);
-			$stmt->bindValue(':valor', $valor);
-			$stmt->bindValue(':descricao', $descricao);
+			move_uploaded_file($foto['tmp_name'], 'assets/images/anuncios/'.$tmpname);
 
-			$stmt->execute();
+			list($width_orig, $height_orig) = getimagesize('assets/images/anuncios/'.$tmpname);
+			$ratio = $width_orig/$height_orig;
 
-			return true;
-		} catch (PDOException $e) {
-			echo "ERROR: ".$e->getMessage();
-		}
+			$width = 500;
+			$height = 500;
 
-		return false;
+			if ($width/$height > $ratio) {
+				$width = $height * $ratio;
+			} else {
+				$height = $width/$ratio;
+			}
+
+			$img = imagecreatetruecolor($width, $height);
+
+			if ($foto['type'] == 'image/jpeg') {
+				$orig = imagecreatefromjpeg('assets/images/anuncios/'.$tmpname);
+			} else if ($foto['type'] == 'image/png') {
+				$orig = imagecreatefrompng('assets/images/anuncios/'.$tmpname);
+			}
+
+			imagecopyresampled($img, $orig, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+
+			imagejpeg($img, 'assets/images/anuncios/'.$tmpname, 80);
+
+			$sql = "INSERT INTO anuncios (titulo, valor, foto, descricao) VALUES (:titulo, :valor, :foto, :descricao)";
+
+			try {
+				$stmt = $this->db->prepare($sql);
+				$stmt->bindValue(':titulo', $titulo);
+				$stmt->bindValue(':valor', $valor);
+				$stmt->bindValue(':foto', $tmpname);
+				$stmt->bindValue(':descricao', $descricao);
+
+				$stmt->execute();
+
+				return true;
+			} catch (PDOException $e) {
+				echo "ERROR: ".$e->getMessage();
+			}
+		} else {
+			$sql = "INSERT INTO anuncios (titulo, valor, descricao) VALUES (:titulo, :valor, :descricao)";
+
+			try {
+				$stmt = $this->db->prepare($sql);
+				$stmt->bindValue(':titulo', $titulo);
+				$stmt->bindValue(':valor', $valor);
+				$stmt->bindValue(':descricao', $descricao);
+
+				$stmt->execute();
+
+				return true;
+			} catch (PDOException $e) {
+				echo "ERROR: ".$e->getMessage();
+			}
+
+			return false;
+			}
 	}
 
 	public function selectAll() {
@@ -65,22 +112,78 @@ class ProdutoDAO extends Model {
 		$titulo = $produto->getTitulo();
 		$valor = $produto->getValor();
 		$descricao = $produto->getDescricao();
+		$foto = $produto->getFoto();
 
-		$sql = "UPDATE anuncios SET titulo = :titulo, valor = :valor, descricao = :descricao WHERE id = :id";
+		if (($foto['type'] == 'image/jpeg' || $foto['type'] == 'image/png') && $foto['tmpname'] != 'indisponivel.jpg') {
+			$dados = $this->selectById($id);
 
-		$stmt = $this->db->prepare($sql);
-		$stmt->bindValue(':titulo', $titulo);
-		$stmt->bindValue(':valor', $valor);
-		$stmt->bindValue(':descricao', $descricao);
-		$stmt->bindValue(':id', $id);
+			if ($dados['foto'] != 'indisponivel.jpg') {
+				$fotosDel = 'assets/images/anuncios/'.$dados['foto'];
+				unlink($fotosDel);
+			}
 
-		$stmt->execute();
+			$tmpname = md5(time().rand(0, 99)).'.jpg';
 
-		return true;
+			move_uploaded_file($foto['tmp_name'], 'assets/images/anuncios/'.$tmpname);
+
+			list($width_orig, $height_orig) = getimagesize('assets/images/anuncios/'.$tmpname);
+			$ratio = $width_orig/$height_orig;
+
+			$width = 500;
+			$height = 500;
+
+			if ($width/$height > $ratio) {
+				$width = $height * $ratio;
+			} else {
+				$height = $width/$ratio;
+			}
+
+			$img = imagecreatetruecolor($width, $height);
+
+			if ($foto['type'] == 'image/jpeg') {
+				$orig = imagecreatefromjpeg('assets/images/anuncios/'.$tmpname);
+			} else if ($foto['type'] == 'image/png') {
+				$orig = imagecreatefrompng('assets/images/anuncios/'.$tmpname);
+			}
+
+			imagecopyresampled($img, $orig, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+
+			imagejpeg($img, 'assets/images/anuncios/'.$tmpname, 80);
+
+			$sql = "UPDATE anuncios SET titulo = :titulo, valor = :valor, foto = :foto, descricao = :descricao WHERE id = :id";
+
+			$stmt = $this->db->prepare($sql);
+			$stmt->bindValue(':titulo', $titulo);
+			$stmt->bindValue(':valor', $valor);
+			$stmt->bindValue(':foto', $tmpname);
+			$stmt->bindValue(':descricao', $descricao);
+			$stmt->bindValue(':id', $id);
+
+			$stmt->execute();
+
+			return true;
+		} else {
+			$sql = "UPDATE anuncios SET titulo = :titulo, valor = :valor, descricao = :descricao WHERE id = :id";
+
+			$stmt = $this->db->prepare($sql);
+			$stmt->bindValue(':titulo', $titulo);
+			$stmt->bindValue(':valor', $valor);
+			$stmt->bindValue(':descricao', $descricao);
+			$stmt->bindValue(':id', $id);
+
+			$stmt->execute();
+
+			return true;
+		}
 	}
 
 	public function delete(Produto $produto) {
 		$id = $produto->getId();
+
+		if ($produto->getFoto() != 'indisponivel.jpg') {
+			$fotosDel = 'assets/images/anuncios/'.$produto->getFoto();
+			unlink($fotosDel);
+		}
 
 		$sql = "DELETE FROM anuncios WHERE id = :id";
 

@@ -26,12 +26,10 @@
 							R$ <?php echo number_format($anuncio['valor'], 2); ?>
 						</td>
 						<?php if (isset($_SESSION['usuarioTipo']) && $_SESSION['usuarioTipo'] == 'admin'): ?>
-							<?php foreach ($anuncios as $anuncio): ?>
-								<td>
-									<a href="<?php echo BASE_URL; ?>produtos/editar/<?php echo $anuncio['id']; ?>" class="btn btn-primary">Editar</a>
-									<a href="<?php echo BASE_URL; ?>produtos/excluir/<?php echo $anuncio['id']; ?>" class="btn btn-danger">Excluir</a>
-								</td>
-							<?php endforeach; ?>
+							<td>
+								<a href="<?php echo BASE_URL; ?>produtos/editar/<?php echo $anuncio['id']; ?>" class="btn btn-primary">Editar</a>
+								<a href="<?php echo BASE_URL; ?>produtos/excluir/<?php echo $anuncio['id']; ?>" class="btn btn-danger">Excluir</a>
+							</td>
 						<?php endif; ?>
 					</tr>
 					<?php endforeach; ?>

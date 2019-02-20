@@ -29,6 +29,11 @@ class ProdutosController extends Controller {
 			$produto->setValor(addslashes($_POST['valor']));
 			$produto->setDescricao(addslashes($_POST['descricao']));
 
+			if (isset($_FILES['foto']) && !empty($_FILES['foto'])) {
+				$foto = $_FILES['foto'];
+				$produto->setFoto($foto);
+			}
+
 			if ($dao->insert($produto)) {
 				header("Location: ".BASE_URL."produtos");
 			} else {
@@ -65,6 +70,11 @@ class ProdutosController extends Controller {
 			$produto->setValor(addslashes($_POST['valor']));
 			$produto->setDescricao(addslashes($_POST['descricao']));
 
+			if (isset($_FILES['foto']) && !empty($_FILES['foto'])) {
+				$foto = $_FILES['foto'];
+				$produto->setFoto($foto);
+			}
+
 			if ($dao->update($produto)) {
 				header("Location: ".BASE_URL."produtos");
 			} else {
@@ -87,7 +97,9 @@ class ProdutosController extends Controller {
 		$produto = new Produto();
 		$dao = new ProdutoDAO();
 
-		$produto->setId($id);
+		$dados = $dao->selectById($id);
+		$produto->setId($dados['id']);
+		$produto->setFoto($dados['foto']);
 
 		if ($dao->delete($produto)) {
 			header("Location: ".BASE_URL."produtos");
