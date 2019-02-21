@@ -194,4 +194,20 @@ class ProdutoDAO extends Model {
 
 		return true;
 	}
+
+	public function selectLastProducts() {
+		$dados = array();
+
+		$sql = "SELECT * FROM anuncios LIMIT 12";
+
+		$stmt = $this->db->query($sql);
+
+		$stmt->execute();
+
+		if ($stmt->rowCount() > 0) {
+			$dados = $stmt->fetchAll();
+		}
+
+		return $dados;
+	}
 }

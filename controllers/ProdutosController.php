@@ -115,8 +115,10 @@ class ProdutosController extends Controller {
 		$dao = new ProdutoDAO();
 
 		$anuncio = $dao->selectById($id);
+		$outros = $dao->selectLastProducts();
 
 		$dados['anuncio'] = $anuncio;
+		$dados['outros'] = $outros;
 
 		$this->loadTemplate('abrirProduto', $dados);
 	}

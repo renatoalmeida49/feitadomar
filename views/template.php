@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css" />
-    <link rel="icon" type="imagem/jpg" href="<?php echo BASE_URL; ?>assets/images/logo.jpg" />
-	<title>Feita do mar</title>
-	<style type="text/css">
-            body {
-                padding-top: 5rem;
-            }
-
-            .btn-primary {
-                background-color: #009999;
-                border-color: #009999;
-            }
-	</style>
+    	<meta charset="utf-8" />
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    	<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" />
+        <link rel="icon" type="imagem/jpg" href="<?php echo BASE_URL; ?>assets/images/logo.jpg" />
+    	<title>Feita do mar</title>
     </head>
     <body>
 	<header>
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #009999">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #009999">
             <a class="navbar-brand" href="<?php echo BASE_URL; ?>">
                 <img src="<?php echo BASE_URL; ?>assets/images/logo.jpg" width="50" height="50" />
             </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Alterna navegação">
+                <span class="navbar-toggle-icon"></span>
+            </button>
 
             <div class="navbar-collapse collapse" id="navbarMenu">
                 <ul class="navbar-nav">
@@ -41,7 +36,7 @@
                 </ul>
             </div>
 
-            <div class="navbar-collapse collapse justify-content-end" id="navbarLogin">
+            <div class="navbar-collapse collapse justify-content-end" id="navbarMenu">
                 <ul class="navbar-nav">
                     <?php if(isset($_SESSION['usuarioId']) && !empty($_SESSION['usuarioId'])): ?>
                     <li class="nav-item dropdown">
@@ -64,7 +59,7 @@
                     <li class="nav-item <?php echo ($viewData['local']=='cadastre')?'active':''; ?>">
                         <a class="nav-link" href="<?php echo BASE_URL ?>login/cadastrar">Cadastre-se</a>
                     </li>
-                <?php endif; ?>
+                    <?php endif; ?>
                 </ul>
             </div>
         </nav>

@@ -1,0 +1,26 @@
+body {
+    padding-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.btn-primary {
+    background-color: #009999;
+    border-color: #009999;
+}
+
+.title {
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.foto-item {
+	width: 150px;
+	height: 200px;
+	text-align: center;
+	margin-right: 10px;
+	float: left;
+}
+
+.foto-item img {
+	width: 150px;
+}

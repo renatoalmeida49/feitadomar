@@ -1,8 +1,12 @@
 <div class="container">
-	<div class="row justify-content-center">
+	<div class="row-12">
 		<div class="jumbotron">
-        <h1 class="display-4">Nossos produtos</h1>
+        	<h1 class="display-4">Nossos produtos</h1>
     	</div>
+	</div>
+
+	<div class="row">
+		
 	</div>
 
 	<?php if (isset($_SESSION['usuarioTipo']) && $_SESSION['usuarioTipo'] == 'admin'): ?>
@@ -10,6 +14,7 @@
 			<a href="<?php echo BASE_URL; ?>produtos/adicionar" class="btn btn-primary">Adicionar produtos</a>
 		</div>
 	<?php endif; ?>
+
 	<div class="row justify-content-center"	 style="margin-top: 7px">
 		<div class="table-responsive">
 			<table class="table table-stripped table-hover">
@@ -17,7 +22,7 @@
 					<?php foreach ($anuncios as $anuncio): ?>
 					<tr>
 						<td>
-							<img src="<?php echo BASE_URL; ?>assets/images/anuncios/<?php echo $anuncio['foto']; ?>" height="50" border="0"/>
+							<img src="<?php echo BASE_URL; ?>assets/images/anuncios/<?php echo $anuncio['foto']; ?>" height="100" border="0"/>
 						</td>
 						<td>
 							<a href="<?php echo BASE_URL; ?>produtos/abrir/<?php echo $anuncio['id']; ?>"><?php echo $anuncio['titulo'];?></a>
