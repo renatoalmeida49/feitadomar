@@ -9,6 +9,8 @@ class ContatoController extends Controller {
 		$dados = array();
 		$dados['local'] = 'contato';
 		$this->loadTemplate('contato', $dados);
+
+		//Tratamento do formulário de perguntas
 	}
 
 }

@@ -4,7 +4,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<img src="<?php echo BASE_URL; ?>assets/images/anuncios/<?php echo $anuncio['foto']; ?>">
+			<img src="<?php echo BASE_URL; ?>assets/images/anuncios/<?php echo $anuncio['foto']; ?>" class="img-fluid img-thumbnail">
 		</div>
 		<div class="col">
 			<p><?php echo $anuncio['descricao']; ?></p>
@@ -12,8 +12,10 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<p>Outros produtos</p>
+	<hr/>
+
+	<div class="row justify-content-center">
+		<p class="h5">Outros produtos</p>
 	</div>
 
 	<div class="row">

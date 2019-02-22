@@ -6,6 +6,7 @@ body {
 .btn-primary {
     background-color: #009999;
     border-color: #009999;
+    min-width: 100px;
 }
 
 .title {
@@ -23,4 +24,8 @@ body {
 
 .foto-item img {
 	width: 150px;
+}
+
+.foto-item a {
+	margin-top: 5px;
 }

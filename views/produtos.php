@@ -22,7 +22,7 @@
 					<?php foreach ($anuncios as $anuncio): ?>
 					<tr>
 						<td>
-							<img src="<?php echo BASE_URL; ?>assets/images/anuncios/<?php echo $anuncio['foto']; ?>" height="100" border="0"/>
+							<img src="<?php echo BASE_URL; ?>assets/images/anuncios/<?php echo $anuncio['foto']; ?>" height="100" border="0" class=""/>
 						</td>
 						<td>
 							<a href="<?php echo BASE_URL; ?>produtos/abrir/<?php echo $anuncio['id']; ?>"><?php echo $anuncio['titulo'];?></a>
