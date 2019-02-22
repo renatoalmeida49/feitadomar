@@ -2,24 +2,57 @@
     <div class="jumbotron">
         <h1 class="display-4">Contato</h1>
     </div>
+    <?php
+    	if (!empty($msg)) {
+    		echo $msg;
+    	}
+    ?>
     <div class="row">
 		<div class="col-md-8">
 
-			<div class="h5">Faça-nos uma pergunta ou nos deixe uma mensagem.</div>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mensagemModal">Faça-nos uma pergunta ou nos deixe uma mensagem!</button>
 
-			<form method="post">
-				<div class="form-group">
-					<label for="titulo">Título:</label><input type="text" name="titulo" id="titulo" class="form-control" />
-					<label for="pergunta">Pergunta/mensagem:</label><textarea class="form-control" name="pergunta" id="pergunta"></textarea>
-					<label for="autor">Autor:</label><input type="text" name="autor" id="autor" class="form-control" />
+			<div class="modal fade" id="mensagemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-body">
+							<form method="post">
+								<div class="form-group">
+									<label for="titulo">Título:</label><input type="text" name="titulo" id="titulo" class="form-control" required />
+									<label for="mensagem">Pergunta/mensagem:</label><textarea class="form-control" name="mensagem" id="mensagem" required></textarea>
+									<label for="autor">Autor:</label><input type="text" name="autor" id="autor" class="form-control" required />
+								</div>
+								<button type="submit" class="btn btn-primary">Enviar</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+						</div>
+					</div>
 				</div>
+			</div>
 
-				<div class="form-group">
-					<input type="submit" value="Enviar" class="btn btn-primary">
-				</div>
-			</form>
+			<hr/>
 
-			<p>Visite nosso instagram. Contato pode ser também pode ser feito mandando mensagem pelo direct.</p>
+			<p>Visite nosso instagram. Contato também pode ser feito mandando mensagem pelo direct.</p>
+
+			<hr/>
+
+			<ul class="list-unstyled">
+				<?php foreach ($perguntas as $pergunta): ?>
+					<li class="media">
+						<div class="media-body">
+							<h4 class="mt-0"><?php echo $pergunta['titulo']; ?></h4>
+							<blockquote class="blockquote">
+								<p class="mb-0"><?php echo $pergunta['mensagem']; ?></p>
+								<footer class="blockquote-footer"><?php echo $pergunta['autor']; ?></footer>
+							</blockquote>
+							<?php echo $pergunta['resposta']; ?>
+						</div>
+					</li>
+					<hr/>
+				<?php endforeach; ?>
+			</ul>
 		</div>
 		<div class="col-md-4">
 			<div class="card">
