@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 19-Fev-2019 às 17:19
+-- Generation Time: 24-Fev-2019 às 13:34
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -28,14 +28,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `anuncios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` int(11) NOT NULL,
   `titulo` varchar(50) NOT NULL,
   `valor` float NOT NULL,
-  `foto` varchar(50) NOT NULL,
+  `foto` varchar(50) DEFAULT 'indisponivel.jpg',
   `descricao` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_usuario` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -53,6 +51,22 @@ CREATE TABLE IF NOT EXISTS `desejos` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `perguntas`
+--
+
+CREATE TABLE IF NOT EXISTS `perguntas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(50) NOT NULL,
+  `mensagem` varchar(200) NOT NULL,
+  `autor` varchar(50) NOT NULL,
+  `resposta` varchar(200) DEFAULT NULL,
+  `exibe` varchar(1) NOT NULL DEFAULT 'n',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `usuarios`
 --
 
@@ -63,17 +77,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `senha` varchar(32) NOT NULL,
   `tipo` varchar(5) NOT NULL DEFAULT 'user',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Limitadores para a tabela `anuncios`
---
-ALTER TABLE `anuncios`
-  ADD CONSTRAINT `anuncios_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
 
 --
 -- Limitadores para a tabela `desejos`
