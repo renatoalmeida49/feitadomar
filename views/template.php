@@ -42,15 +42,9 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bem vindo, <?php echo $_SESSION['usuarioNome']; ?></a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Ação</a>
-                            <a class="dropdown-item" href="#">Outra ação</a>
+                            <a class="dropdown-item" href="#">Lista de desejos</a>
+                            <a class="dropdown-item" href="<?php echo BASE_URL; ?>login/sair">Sair</a>
                         </div>
-                    </li>
-                    <li class="nav-item <?php echo ($viewData['local']=='lista')?'active':''; ?>">
-                        <a class="nav-link" href="#">Lista de desejos</a>
-                    </li>
-                    <li class="nav-item <?php echo ($viewData['local']=='sair')?'active':''; ?>">
-                        <a class="nav-link" href="<?php echo BASE_URL; ?>login/sair">Sair</a>
                     </li>
                     <?php else: ?>
                     <li class="nav-item <?php echo ($viewData['local']=='login')?'active':''; ?>">

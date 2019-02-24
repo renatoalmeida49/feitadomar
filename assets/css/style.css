@@ -9,6 +9,10 @@ body {
     min-width: 100px;
 }
 
+.btn-danger {
+	min-width: 100px;
+}
+
 .title {
 	margin-top: 5px;
 	margin-bottom: 10px;
