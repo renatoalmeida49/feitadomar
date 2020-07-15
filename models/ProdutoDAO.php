@@ -1,8 +1,10 @@
 <?php
 class ProdutoDAO extends Model {
 
-	public function __construct() {
-		parent::__construct();
+	private $pdo;
+
+	public function __construct(PDO $pdo) {
+		$this->pdo = $pdo;
 	}
 
 
@@ -44,7 +46,7 @@ class ProdutoDAO extends Model {
 			$sql = "INSERT INTO anuncios (titulo, valor, foto, descricao) VALUES (:titulo, :valor, :foto, :descricao)";
 
 			try {
-				$stmt = $this->db->prepare($sql);
+				$stmt = $this->pdo->prepare($sql);
 				$stmt->bindValue(':titulo', $titulo);
 				$stmt->bindValue(':valor', $valor);
 				$stmt->bindValue(':foto', $tmpname);
@@ -60,7 +62,7 @@ class ProdutoDAO extends Model {
 			$sql = "INSERT INTO anuncios (titulo, valor, descricao) VALUES (:titulo, :valor, :descricao)";
 
 			try {
-				$stmt = $this->db->prepare($sql);
+				$stmt = $this->pdo->prepare($sql);
 				$stmt->bindValue(':titulo', $titulo);
 				$stmt->bindValue(':valor', $valor);
 				$stmt->bindValue(':descricao', $descricao);
@@ -80,7 +82,7 @@ class ProdutoDAO extends Model {
 		$dados = array();
 		$sql = "SELECT * FROM anuncios";
 
-		$stmt = $this->db->query($sql);
+		$stmt = $this->pdo->query($sql);
 
 		$stmt->execute();
 
@@ -96,7 +98,7 @@ class ProdutoDAO extends Model {
 
 		$sql = "SELECT * FROM anuncios WHERE id = :id";
 
-		$stmt = $this->db->prepare($sql);
+		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':id', $id);
 		$stmt->execute();
 
@@ -152,7 +154,7 @@ class ProdutoDAO extends Model {
 
 			$sql = "UPDATE anuncios SET titulo = :titulo, valor = :valor, foto = :foto, descricao = :descricao WHERE id = :id";
 
-			$stmt = $this->db->prepare($sql);
+			$stmt = $this->dpo->prepare($sql);
 			$stmt->bindValue(':titulo', $titulo);
 			$stmt->bindValue(':valor', $valor);
 			$stmt->bindValue(':foto', $tmpname);
@@ -165,7 +167,7 @@ class ProdutoDAO extends Model {
 		} else {
 			$sql = "UPDATE anuncios SET titulo = :titulo, valor = :valor, descricao = :descricao WHERE id = :id";
 
-			$stmt = $this->db->prepare($sql);
+			$stmt = $this->pdo->prepare($sql);
 			$stmt->bindValue(':titulo', $titulo);
 			$stmt->bindValue(':valor', $valor);
 			$stmt->bindValue(':descricao', $descricao);
@@ -187,7 +189,7 @@ class ProdutoDAO extends Model {
 
 		$sql = "DELETE FROM anuncios WHERE id = :id";
 
-		$stmt = $this->db->prepare($sql);
+		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':id', $id);
 
 		$stmt->execute();
@@ -200,7 +202,7 @@ class ProdutoDAO extends Model {
 
 		$sql = "SELECT * FROM anuncios LIMIT 12";
 
-		$stmt = $this->db->query($sql);
+		$stmt = $this->pdo->query($sql);
 
 		$stmt->execute();
 

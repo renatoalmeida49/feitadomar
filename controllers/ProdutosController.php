@@ -1,15 +1,11 @@
 <?php
 class ProdutosController extends Controller {
 
-	public function __construct() {
-		parent::__construct();
-	}
-
 	public function index() {
 		$dados = array();
 		$dados['local'] = 'produtos';
 
-		$dao = new ProdutoDAO;
+		$dao = new ProdutoDAO(Database::getInstance());
 		$anuncios = $dao->selectAll();
 
 		$dados['anuncios'] = $anuncios;
@@ -23,7 +19,7 @@ class ProdutosController extends Controller {
 
 		if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
 			$produto = new Produto();
-			$dao = new ProdutoDAO();
+			$dao = new ProdutoDAO(Database::getInstance());
 
 			$produto->setTitulo(addslashes($_POST['titulo']));
 			$produto->setValor(addslashes($_POST['valor']));
@@ -56,7 +52,7 @@ class ProdutosController extends Controller {
 		$dados = array();
 		$dados['local'] = 'produtos';
 
-		$dao = new ProdutoDAO();
+		$dao = new ProdutoDAO(Database::getInstance());
 
 		$anuncio = $dao->selectById($id);
 
@@ -95,7 +91,7 @@ class ProdutosController extends Controller {
 		}
 
 		$produto = new Produto();
-		$dao = new ProdutoDAO();
+		$dao = new ProdutoDAO(Database::getInstance());
 
 		$dados = $dao->selectById($id);
 		$produto->setId($dados['id']);
@@ -112,7 +108,7 @@ class ProdutosController extends Controller {
 		$dados = array();
 		$dados['local'] = 'produtos';
 
-		$dao = new ProdutoDAO();
+		$dao = new ProdutoDAO(Database::getInstance());
 
 		$anuncio = $dao->selectById($id);
 		$outros = $dao->selectLastProducts();

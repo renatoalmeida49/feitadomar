@@ -1,16 +1,12 @@
 <?php
 class ContatoController extends Controller {
 
-	public function __construct(){
-		parent::__construct();
-	}
-
 	public function index() {
 		$dados = array();
 		$dados['local'] = 'contato';
 
 		$pergunta = new Pergunta();
-		$dao = new PerguntaDAO();
+		$dao = new PerguntaDAO(Database::getInstance());
 
 		$respostas = $dao->getPerguntasRespondidas();
 		$dados['respostas'] = $respostas;
@@ -57,7 +53,7 @@ class ContatoController extends Controller {
 	public function editarResposta($id) {
 		$dados = array();
 		$dados['local'] = 'contato';
-		$dao = new PerguntaDAO();
+		$dao = new PerguntaDAO(Database::getInstance());
 
 		$pergunta = $dao->selectById($id);
 
@@ -83,7 +79,7 @@ class ContatoController extends Controller {
 
 	public function excluirResposta($id) {
 		$pergunta = new Pergunta();
-		$dao = new PerguntaDAO();
+		$dao = new PerguntaDAO(Database::getInstance());
 
 		$pergunta->setId($id);
 

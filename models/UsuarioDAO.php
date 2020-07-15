@@ -1,8 +1,9 @@
 <?php
 class UsuarioDAO extends Model {
+	private $pdo;
 
-	public function __construct() {
-		parent::__construct();
+	public function __construct(PDO $pdo) {
+		$this->pdo = $pdo;
 	}
 
 	public function login(Usuario $usuario) {
@@ -10,7 +11,7 @@ class UsuarioDAO extends Model {
 		$senha = $usuario->getSenha();
 
 		$sql = "SELECT * FROM usuarios WHERE login = :login AND senha = :senha";
-		$stmt = $this->db->prepare($sql);
+		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':login', $login);
 		$stmt->bindValue(':senha', md5($senha));
 
@@ -34,14 +35,14 @@ class UsuarioDAO extends Model {
 		$senha = $usuario->getSenha();
 
 		$sql = "SELECT id FROM usuarios WHERE login = ?";
-		$stmt = $this->db->prepare($sql);
+		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindParam(1, $login);
 		$stmt->execute();
 
 		if ($stmt->rowCount() == 0) {
 			$sql = "INSERT INTO usuarios (nome, login, senha) VALUES (:nome, :login, :senha)";
 		
-			$stmt = $this->db->prepare($sql);
+			$stmt = $this->pdo->prepare($sql);
 			$stmt->bindValue(':nome', $nome);
 			$stmt->bindValue(':login', $login);
 			$stmt->bindValue('senha', md5($senha));

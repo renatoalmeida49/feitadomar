@@ -1,17 +1,13 @@
 <?php
 class LoginController extends Controller {
 
-	public function __construct() {
-		parent::__construct();
-	}
-
 	public function index() {
 		$dados = array();
 		$dados['local'] = 'login';
 
 		if (isset($_POST['login']) && isset($_POST['senha'])) {
 			$usuario = new Usuario();
-			$dao = new UsuarioDAO();
+			$dao = new UsuarioDAO(Database::getInstance());
 
 			$usuario->setLogin(addslashes($_POST['login']));
 			$usuario->setSenha($_POST['senha']);
@@ -32,7 +28,7 @@ class LoginController extends Controller {
 	public function cadastrar() {
 		$dados = array();
 		$usuario = new Usuario();
-		$dao = new UsuarioDAO();
+		$dao = new UsuarioDAO(Database::getInstance());
 		$dados['local'] = 'cadastre';
 
 		if (isset($_POST['login']) && !empty($_POST['nome'])) {

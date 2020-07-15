@@ -1,8 +1,10 @@
 <?php
 class PerguntaDAO extends Model {
 
-	public function __construct() {
-		parent::__construct();
+	private $pdo;
+
+	public function __construct($pdo) {
+		$this->pdo = $pdo;
 	}
 
 	public function insert(Pergunta $pergunta) {
@@ -12,7 +14,7 @@ class PerguntaDAO extends Model {
 
 		$sql = "INSERT INTO perguntas (titulo, mensagem, autor) VALUES (:titulo, :mensagem, :autor)";
 
-		$stmt = $this->db->prepare($sql);
+		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':titulo', $titulo);
 		$stmt->bindValue(':mensagem', $mensagem);
 		$stmt->bindValue(':autor', $autor);
@@ -27,7 +29,7 @@ class PerguntaDAO extends Model {
 
 		$sql = "SELECT * FROM perguntas WHERE exibe = 's'";
 
-		$stmt = $this->db->query($sql);
+		$stmt = $this->pdo->query($sql);
 		$stmt->execute();
 
 		if ($stmt->rowCount() > 0) {
@@ -42,7 +44,7 @@ class PerguntaDAO extends Model {
 
 		$sql = "SELECT * FROM perguntas WHERE exibe = 'n'";
 
-		$stmt = $this->db->query($sql);
+		$stmt = $this->pdo->query($sql);
 		$stmt->execute();
 
 		if ($stmt->rowCount() > 0) {
@@ -58,7 +60,7 @@ class PerguntaDAO extends Model {
 
 		$sql = "UPDATE perguntas SET resposta = :resposta, exibe = 's' WHERE id = :id";
 
-		$stmt = $this->db->prepare($sql);
+		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':resposta', $resposta);
 		$stmt->bindValue(':id', $id);
 		$stmt->execute();
@@ -71,7 +73,7 @@ class PerguntaDAO extends Model {
 
 		$sql = "DELETE FROM perguntas WHERE id = :id";
 
-		$stmt = $this->db->prepare($sql);
+		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':id', $id);
 		$stmt->execute();
 
@@ -82,7 +84,7 @@ class PerguntaDAO extends Model {
 		$dados = array();
 		$sql = "SELECT * FROM perguntas WHERE id = :id";
 
-		$stmt = $this->db->prepare($sql);
+		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(":id", $id);
 		$stmt->execute();
 
