@@ -1,14 +1,17 @@
 # feitadomar
-Site para vendas de produtos.
 
-Ferramentas:
+Website for an online store.
 
-HTML5
+## Tools used:
 
-CSS3 (Bootstrap v4.1.3)
+* HTML5
+* CSS3 (Bootstrap v4.1.3)
+* JS (jQuery v3.3.1)
+* MySQL (8.0.21)
+* PHP (v7.4)
 
-JS (jQuery v3.3.1)
+## How to run the project:
 
-MySQL
-
-PHP (v7.4)
+1. Run the SQL file located in `assets/sql`
+2. Go to the `config.php` file and fill the fields with the data of your BD
+3. Run the project accessing `index.php` in the root directory

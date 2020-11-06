@@ -14,7 +14,7 @@ class Core {
 			$url = explode('/', $url);
 			array_shift($url);
 
-			$currentController = $url[0].'Controller';
+			$currentController = ucfirst($url[0]).'Controller';
 			array_shift($url);
 
 			if (isset($url[0]) && !empty($url[0])) {
@@ -34,7 +34,7 @@ class Core {
 		}
 
 		if (!file_exists('controllers/'.$currentController.'.php') || !method_exists($currentController, $currentAction)) {
-			$currentController = 'erroController';
+			$currentController = 'ErroController';
 			$currentAction = 'index';
 		}
 

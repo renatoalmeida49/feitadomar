@@ -8,8 +8,8 @@ if (ENVIRONMENT == 'development') {
 	$config['dbdriver'] = 'mysql';
 	$config['dbname'] = 'feitadomar';
 	$config['host'] = 'localhost';
-	$config['dbuser'] = 'root';
-	$config['dbpass'] = '';
+	$config['dbuser'] = 'developer';
+	$config['dbpass'] = 'developer';
 } else {
 	define("BASE_URL", 'https://meusite.com.br');
 	$config['dbdriver'] = 'mysql';
