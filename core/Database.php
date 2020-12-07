@@ -1,21 +1,18 @@
 <?php
+namespace core;
+
+use \src\Config;
+
 class Database {
-	private static $pdo;
+    private static $_pdo;
+    public static function getInstance() {
+        if(!isset(self::$_pdo)) {
+            self::$_pdo = new \PDO(Config::DB_DRIVER.":dbname=".Config::DB_DATABASE.";host=".Config::DB_HOST, Config::DB_USER, Config::DB_PASS);
+        }
+        return self::$_pdo;
+    }
 
-	public static function getInstance() {
-		if (!isset($pdo)) {
-			global $config;
-
-			try {
-				$pdo = new PDO($config['dbdriver'].":dbname=".$config['dbname'].";host=".$config['host'], $config['dbuser'], $config['dbpass']);
-			} catch (PDOException $e) {
-				echo "ERRO: ".$e->getMessage();
-				exit;
-			}
-		}
-
-		return $pdo;
-	}
-
-	private function __construct() {}
+    private function __construct() { }
+    private function __clone() { }
+    private function __wakeup() { }
 }
