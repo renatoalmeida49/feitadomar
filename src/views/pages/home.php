@@ -1,5 +1,7 @@
 <?= $render('header'); ?>
-	<?= $render('navbar'); ?>
+
+	<?= $render('navbar', ['local' => $local]); ?>
+
 	<div class="container">
 		<div id="carousel" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -35,5 +37,9 @@
 			<p class="lead">Loja de moda praia perfeita para seu estilo. Confira nossos produtos navegando pelo site</p>
 		</div>
 	</div>
+
+	<?= $render('modalAbout');?>
+	<?= $render('modalContact');?>
+	<?= $render('modalSingup'); ?>
 
 <?= $render('footer');?>
