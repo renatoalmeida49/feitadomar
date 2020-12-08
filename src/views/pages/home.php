@@ -38,8 +38,4 @@
 		</div>
 	</div>
 
-	<?= $render('modalAbout');?>
-	<?= $render('modalContact');?>
-	<?= $render('modalSingup'); ?>
-
 <?= $render('footer');?>

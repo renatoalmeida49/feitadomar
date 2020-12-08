@@ -9,12 +9,12 @@ class ProdutosController extends Controller {
 		$dados = array();
 		$dados['local'] = 'produtos';
 
-		$dao = new ProdutoDAO(Database::getInstance());
-		$anuncios = $dao->selectAll();
+		/*$dao = new ProdutoDAO(Database::getInstance());
+		$anuncios = $dao->selectAll();*/
 
-		$dados['anuncios'] = $anuncios;
+		$dados['anuncios'] = array();
 
-		$this->loadTemplate('produtos', $dados);
+		$this->render('produtos', $dados);
 	}
 
 	public function adicionar() {

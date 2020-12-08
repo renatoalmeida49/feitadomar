@@ -44,4 +44,9 @@
             <?php endif; ?>
         </ul>
     </div>
+
 </nav>
+
+<?= $render('modalAbout');?>
+<?= $render('modalContact');?>
+<?= $render('modalSingup'); ?>
