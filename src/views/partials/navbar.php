@@ -26,27 +26,28 @@
 
     <div class="navbar-collapse collapse justify-content-end" id="navbarMenu">
         <ul class="navbar-nav">
-            <?php if(isset($_SESSION['usuarioId']) && !empty($_SESSION['usuarioId'])): ?>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bem vindo, <?php echo $_SESSION['usuarioNome']; ?></a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Lista de desejos</a>
-                    <a class="dropdown-item" href="<?= $base; ?>/login/sair">Sair</a>
-                </div>
-            </li>
+            <?php if(isset($_SESSION['token']) && $_SESSION['token'] != ''): ?>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bem vindo, <?php echo $_SESSION['token']; ?></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Lista de desejos</a>
+                        <a class="dropdown-item" href="<?= $base; ?>/logoff">Sair</a>
+                    </div>
+                </li>
             <?php else: ?>
-            <li class="nav-item <?php echo ($viewData['local']=='login')?'active':''; ?>">
-                <a class="nav-link" href="<?= $base; ?>/Login">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#modalSingup" data-toggle="modal" data-target="#modalSingup">Cadastre-se</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#modalSingin" data-toggle="modal" data-target="#modalSingin">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#modalSingup" data-toggle="modal" data-target="#modalSingup">Cadastre-se</a>
+                </li>
             <?php endif; ?>
         </ul>
     </div>
-
+    <?= print_r($_SESSION); ?>
 </nav>
 
 <?= $render('modalAbout');?>
 <?= $render('modalContact');?>
 <?= $render('modalSingup'); ?>
+<?= $render('modalSingin'); ?>

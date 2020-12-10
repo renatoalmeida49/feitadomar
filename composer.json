@@ -1,5 +1,5 @@
 {
-    "require":{
+    "require": {
         "clancats/hydrahon": "^1.1"
     },
     "autoload": {
